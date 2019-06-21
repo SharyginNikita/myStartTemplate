@@ -14,7 +14,7 @@ const imagemin = require('gulp-imagemin');
 const imageminMozjpeg = require('imagemin-mozjpeg');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
-gulp.task('build-html', function (done) {
+gulp.task('build-html', done => {
     gulp.src('./src/templates/**/*.pug')
         .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
         .pipe(pug())
@@ -25,7 +25,7 @@ gulp.task('build-html', function (done) {
 });
 
 
-gulp.task('build-js', function (done) {
+gulp.task('build-js', done => {
     gulp.src('./src/js/**/*.{js,json}')
         .pipe(named())
         .pipe(webpack(require('./webpack.config')))
@@ -34,7 +34,7 @@ gulp.task('build-js', function (done) {
     done();
 });
 
-gulp.task('build-css', function (done) {
+gulp.task('build-css', done => {
     gulp.src('./src/scss/**/*.scss')
         .pipe(sourcemaps.init())
         .pipe(sass({
@@ -47,7 +47,7 @@ gulp.task('build-css', function (done) {
     done();
 });
 
-gulp.task('build-images', function (done) {
+gulp.task('build-images', done => {
     gulp.src('./src/images/**/*')
         .pipe(imagemin([
             imagemin.gifsicle({interlaced: true}),
@@ -75,12 +75,13 @@ gulp.task('build-fonts', done => {
 });
 
 
-gulp.task('watch', function ()  {
+gulp.task('watch', done => {
 
     browserSync.init({
         server: {
             baseDir: 'public'
         },
+        notify: false
     });
 
     gulp.watch('./src/templates/**/*.pug', gulp.parallel('build-html'));    
@@ -88,6 +89,7 @@ gulp.task('watch', function ()  {
     gulp.watch('./src/scss/**/*.scss', gulp.parallel('build-css'));    
     gulp.watch('./src/images/**/*', gulp.parallel('build-images'));
 
+    done();
 });
 
 gulp.task('default', 
