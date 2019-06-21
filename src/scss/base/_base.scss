@@ -1,0 +1,46 @@
+.body {
+
+    margin: 0;
+    padding: 0;
+    font-family: $font-default;
+
+}
+
+a {
+
+    text-decoration: none;
+
+}
+
+.main {
+
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__wrapper {
+
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 1280px;
+
+    }
+
+    &__content {
+    
+        display: flex;
+        flex-direction: column;
+        margin: 0 30px;
+
+        &_bg {
+        
+            background-color: #fff;
+            box-shadow: $shadow-default;
+        
+        }
+    }
+}
+
+

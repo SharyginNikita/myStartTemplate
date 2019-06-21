@@ -1,0 +1,30 @@
+doctype html
+html(lang="ru")
+
+    head
+
+        title myStartTemplate
+        meta(charset="utf-8")
+        meta(name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, maximum-scale=1.0")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="msapplication-TileColor" content="#ffffff")
+        //meta(name="msapplication-TileImage" content="/images/faviocns/ms-icon-144x144.png")
+        meta(name="theme-color" content="#ffffff")
+        link(rel="stylesheet" href="/css/main.css")
+
+    body.body
+
+        include components/header
+
+        main.main
+
+            .main__wrapper
+
+                section.main__content
+
+                    h1.title.title_h1 My Start Template!
+
+        include components/footer.pug
+
+    script(src="/js/main.js")
+    script(src="/js/global.js")

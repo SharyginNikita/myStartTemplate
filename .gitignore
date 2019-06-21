@@ -1,0 +1,7 @@
+node_modules
+public/data
+!public/data/.gitkeep
+public/admin/pl
+!public/admin/pl/.gitkeep
+error_log
+yarn-error.log
