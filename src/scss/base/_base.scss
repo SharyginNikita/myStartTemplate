@@ -24,22 +24,8 @@ a {
         display: flex;
         flex-direction: column;
         width: 100%;
-        max-width: 1280px;
+        max-width: $width-container;
 
-    }
-
-    &__content {
-    
-        display: flex;
-        flex-direction: column;
-        margin: 0 30px;
-
-        &_bg {
-        
-            background-color: #fff;
-            box-shadow: $shadow-default;
-        
-        }
     }
 }
 
