@@ -1,7 +1,7 @@
-# -myStartTemplate
+# myStartTemplate
 Start template (Gulp + Webpack) for Pug, SCSS, JS, Vue
 
-# Особенности
+# О шаблоне
 * именование классов по [БЭМ](https://ru.bem.info/)
 * используется БЭМ-структура
 * используются препроцессоры [Pug](https://pugjs.org/) и [SCSS](https://sass-lang.com/)
