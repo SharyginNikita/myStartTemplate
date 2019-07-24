@@ -1,0 +1,33 @@
+include ./mixins/mixins.pug
+
+doctype html
+html(lang="ru")
+
+    head
+
+        title myStartTemplate
+        meta(charset="utf-8")
+        meta(name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, maximum-scale=1.0")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="msapplication-TileColor" content="#ffffff")
+        //meta(name="msapplication-TileImage" content="/images/faviocns/ms-icon-144x144.png")
+        meta(name="theme-color" content="#ffffff")
+        link(rel="stylesheet" href="/css/main.css")
+
+    body.body
+
+        include components/header.pug
+
+        main.main
+
+            .main__wrapper
+
+                block content
+
+        include components/footer.pug
+
+        noscript У вас отключен JavaScript, пожалуйста, включите его для корректной работы сайта.
+
+        block scripts
+            script(src="/js/main.js")
+            script(src="/js/global.js")

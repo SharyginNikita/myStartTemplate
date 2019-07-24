@@ -1,0 +1,10 @@
+mixin navList(classNav, linkStatus, ...items)
+    if linkStatus
+        nav&attributes(attributes)
+            each item in items
+                a(href=item.href)&attributes(attributes)= item.title
+    else
+        nav&attributes(attributes)
+            each item in items
+                a(href='#')&attributes(attributes)= item.title
+
