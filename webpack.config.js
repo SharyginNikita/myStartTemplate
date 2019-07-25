@@ -60,8 +60,12 @@ module.exports = {
     resolve: {
         extensions: ['*', '.js', '.json', '.vue'],
     },
+    optimization: {
+        splitChunks: {
+            chunks: 'all'
+        }
+    },
     plugins: [
         new VueLoaderPlugin()
     ],
-
 };
