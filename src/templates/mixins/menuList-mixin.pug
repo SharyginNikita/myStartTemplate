@@ -1,4 +1,4 @@
-mixin menuList(items, deepLimit = 1, deep = 0)
+mixin menuList(items, deepLimit = 0, deep = 0)
     ul(class="menu menu_level-" + deep)
         each item in items
             li(class="menu__item menu__item_level-" + deep)
@@ -6,9 +6,6 @@ mixin menuList(items, deepLimit = 1, deep = 0)
                 if deep < deepLimit
                     +menuList(items, deepLimit, deep + 1)
 
-mixin navList(items, deepLimit)
-    nav&attributes(attributes)
-        +menuList(items, deepLimit)
 
 //- example
 
@@ -31,8 +28,9 @@ mixin navList(items, deepLimit)
             {title: 'linkTitle3'},
             {title: 'linkTitle4'},
             {title: 'linkTItle4'}
-        ] 
-    )(class="header__nav header-nav") <-- attributes for nav 
+        ],
+        2
+    )
 
 
 
