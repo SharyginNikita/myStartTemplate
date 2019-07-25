@@ -1,8 +1,2 @@
-mixin navList(classNav, defaultHrefStatus, ...items)
-    nav&attributes(attributes)
-        each item in items
-            if defaultHrefStatus
-                a(href='#')&attributes(attributes)= item.title
-            else
-                a(href=item.link)&attributes(attributes)= item.title
-
+include navList-mixin.pug  
+//- mixin for render multi level menu

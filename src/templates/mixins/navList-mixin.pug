@@ -1,0 +1,40 @@
+mixin menuList(items, deepLimit = 1, deep = 0)
+    ul(class="menu menu_level-" + deep)
+        each item in items
+            li(class="menu__item menu__item_level-" + deep)
+                a(href= item.href ? item.href : '#' class="menu__link menu__link_level-" + deep)= item.title
+                if deep < deepLimit
+                    +menuList(items, deepLimit, deep + 1)
+
+mixin navList(items, deepLimit)
+    nav&attributes(attributes)
+        +menuList(items, deepLimit)
+
+//- example
+
+    subsequent levels menu copy level 0 values
+
+    items - array with objects containing link titles and href titles
+
+    deepLimit - variable responsible for the number of levels
+
+    deep - you can pass this variable to indicate the initial level of the menu (optional variable)
+
+    class name ul - menu menu_level- + 'current deep value' --> menu menu_level-0
+    class name li - menu__item menu__item_level- + 'current deep value' --> menu__item menu__item_level_0
+    class name a - menu__link menu__link_level- + 'current deep value' --> menu__link menu__link_level_0
+
+    +navList(
+        [
+            {title: 'linkTitle1', href: '/linkHref0' <-- if you need, you can set desired link (default value = '#')},
+            {title: 'linkTitle2', href: '/linkHref1'},
+            {title: 'linkTitle3'},
+            {title: 'linkTitle4'},
+            {title: 'linkTItle4'}
+        ] 
+    )(class="header__nav header-nav") <-- attributes for nav 
+
+
+
+
+
