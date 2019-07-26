@@ -2,11 +2,13 @@ header.header
 
     .header__wrapper
 
-        +navList('header-nav__link',
-            false,
-            {title: Главная, href: '/#'},
-            {title: test, href: '/#'}
-            )(class="header__nav header-nav")
-
+        +menuList(
+            [
+                {title: 'Главная'},
+                {title: 'Об автошколе'},
+                {title: 'Цены'},
+                {title: 'Учащимся'},
+                {title: 'Контакты'}
+            ])
 
 

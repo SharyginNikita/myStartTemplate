@@ -16,7 +16,7 @@ html(lang="ru")
 
     body.body
 
-        include components/header.pug
+        include layout/header.pug
 
         main.main
 
@@ -24,10 +24,9 @@ html(lang="ru")
 
                 block content
 
-        include components/footer.pug
+        include layout/footer.pug
 
         noscript У вас отключен JavaScript, пожалуйста, включите его для корректной работы сайта.
 
         block scripts
             script(src="/js/main.js")
-            script(src="/js/global.js")

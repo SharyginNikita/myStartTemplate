@@ -15,7 +15,7 @@ const imageminMozjpeg = require('imagemin-mozjpeg');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 gulp.task('build-html', done => {
-    gulp.src('./src/templates/**/*.pug')
+    gulp.src('./src/templates/pages/*.pug')
         .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
         .pipe(pug())
         .pipe(prettify({}))
