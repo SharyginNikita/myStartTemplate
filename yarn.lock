@@ -705,13 +705,6 @@
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.7.0.tgz#9a06f4f137ee84d7df0460c1fdb1135ffa6c50fd"
   integrity sha512-ONhaKPIufzzrlNbqtWFFd+jlnemX6lJAgq9ZeiZtS7I1PIf/la7CW4m83rTXRnVnsMbW2k56pGYu7AUFJD9Pow==
 
-"@toast-ui/vue-calendar@^1.0.3":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@toast-ui/vue-calendar/-/vue-calendar-1.1.0.tgz#68d18d58c5c52d4868a05595a69a68e26fe74061"
-  integrity sha512-xGxB8ZiaFydOPkBZsGELjPU+PumI+4K4LYtLg0Ycj4BwP3MEEeYSuVqqGiCtk6SfAdz/GrYQAaZXkIAjA86B0w==
-  dependencies:
-    tui-calendar "^1.9.0"
-
 "@types/babel-types@*", "@types/babel-types@^7.0.0":
   version "7.0.7"
   resolved "https://registry.yarnpkg.com/@types/babel-types/-/babel-types-7.0.7.tgz#667eb1640e8039436028055737d2b9986ee336e3"
@@ -5392,11 +5385,6 @@ jpegtran-bin@^3.0.0:
     bin-wrapper "^3.0.0"
     logalot "^2.0.0"
 
-jquery@^1.11.0:
-  version "1.12.4"
-  resolved "https://registry.yarnpkg.com/jquery/-/jquery-1.12.4.tgz#01e1dfba290fe73deba77ceeacb0f9ba2fec9e0c"
-  integrity sha1-AeHfuikP5z3rp3zurLD5ui/sngw=
-
 js-base64@^2.1.8:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.5.1.tgz#1efa39ef2c5f7980bb1784ade4a8af2de3291121"
@@ -9065,44 +9053,6 @@ tty-browserify@0.0.0:
   resolved "https://registry.yarnpkg.com/tty-browserify/-/tty-browserify-0.0.0.tgz#a157ba402da24e9bf957f9aa69d524eed42901a6"
   integrity sha1-oVe6QC2iTpv5V/mqadUk7tQpAaY=
 
-tui-calendar@^1.9.0:
-  version "1.12.3"
-  resolved "https://registry.yarnpkg.com/tui-calendar/-/tui-calendar-1.12.3.tgz#606646e25e691f5849c14f9d4341f92a6fc2a51a"
-  integrity sha512-w8ZPzqS3MhevbWW5B1YGeZwSS1TjKsEvZnW9ug2lJDsUM+r1nePFlibx/1BpFHyWkTzUX0aKdt5ahg/0v959sg==
-  dependencies:
-    tui-code-snippet "^1.5.0"
-    tui-date-picker "^3.2.1"
-    tui-time-picker "^1.5.0"
-
-tui-code-snippet@^1.2.5, tui-code-snippet@^1.5.0:
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/tui-code-snippet/-/tui-code-snippet-1.5.2.tgz#f4b8f0f1ac996b0b5b621f77c9507af19a0de238"
-  integrity sha512-6UqTlQaaC1KLcmC0HAoq5dtl1G4Fib+R+NC7pmaV7kiIlZ7JqKhUmnOoGRcreAyzd81UTK/vCvhrw9QJskpCFQ==
-
-tui-date-picker@^3.2.1:
-  version "3.3.4"
-  resolved "https://registry.yarnpkg.com/tui-date-picker/-/tui-date-picker-3.3.4.tgz#e3422ce6e38e6d86579823a3d7153eb83e850109"
-  integrity sha512-tJekUFhVFh6OeHSkKP6zgVjMNacLToDxaNVpVtmEZgmEo7r1xCgqq3RgVOqf7Im+7cHE5BQtJdcX/ZNP3tO9Yg==
-  dependencies:
-    jquery "^1.11.0"
-    tui-code-snippet "^1.5.0"
-    tui-time-picker "^1.3.0"
-
-tui-dom@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/tui-dom/-/tui-dom-3.0.0.tgz#2e7ed381396134871f16aecf853fe54e83e1c66f"
-  integrity sha512-/MTX6rG8zmHN6AqGiK9u5LfkwfTOdJC75+wpB8xdKJ3UeLfc/AolXxHDmnssh++8dZXSnCoS3VynbsjvOqRTdg==
-  dependencies:
-    tui-code-snippet "^1.2.5"
-
-tui-time-picker@^1.3.0, tui-time-picker@^1.5.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/tui-time-picker/-/tui-time-picker-1.6.0.tgz#df5c7b26d4d5d8e17263d4ee4478babb5478464b"
-  integrity sha512-/RbNAlqudTYcXN3j5mTEjsl91PSoUvkcfzHQg60Cs+citES6BR+oBZuSbkGNs6xtHHuLp6BsPuvqjfOqO8rgNg==
-  dependencies:
-    tui-code-snippet "^1.5.0"
-    tui-dom "^3.0.0"
-
 tunnel-agent@^0.4.0:
   version "0.4.3"
   resolved "https://registry.yarnpkg.com/tunnel-agent/-/tunnel-agent-0.4.3.tgz#6373db76909fe570e08d73583365ed828a74eeeb"
@@ -9596,11 +9546,6 @@ vue-router@^3.0.2:
   version "3.0.7"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.0.7.tgz#b36ca107b4acb8ff5bc4ff824584059c23fcb87b"
   integrity sha512-utJ+QR3YlIC/6x6xq17UMXeAfxEvXA0VKD3PiSio7hBOZNusA1jXcbxZxVEfJunLp48oonjTepY8ORoIlRx/EQ==
-
-vue-spinner@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/vue-spinner/-/vue-spinner-1.0.3.tgz#eecd3f79f63a815b690e9d54b199ab65be695499"
-  integrity sha512-Phh6QC/Bh80ZE/0SH9ADw4irbRGwFK6VZsTksPHpPm16xga2OXwNC2nI7SEPnndUZP+Lgu1wu+pbH6i6+5siBQ==
 
 vue-style-loader@^4.1.0:
   version "4.1.2"
