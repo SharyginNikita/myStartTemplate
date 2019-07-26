@@ -2,9 +2,8 @@
 
 import { mapGetters, mapActions } from 'vuex';
 import popup from 'popup';
-import { createMask } from "imask";
-import VueRecaptcha from 'vue-recaptcha';
-import authFetch from '../../js/lib/auth-fetch.js';
+//import { createMask } from "imask";
+//import VueRecaptcha from 'vue-recaptcha';
 
 export default {
 
