@@ -39,6 +39,7 @@
         "style-loader": "^0.23.1",
         "swiper": "^4.5.0",
         "template-compiler": "^1.2.1",
+        "terser-webpack-plugin": "^1.4.1",
         "url-loader": "^1.1.1",
         "url-parse": "^1.4.4",
         "vinyl-named": "^1.1.0",

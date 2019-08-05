@@ -63,7 +63,8 @@ module.exports = {
     optimization: {
         splitChunks: {
             chunks: 'all'
-        }
+        },
+        minimizer: [new TerserPlugin()],
     },
     plugins: [
         new VueLoaderPlugin()
