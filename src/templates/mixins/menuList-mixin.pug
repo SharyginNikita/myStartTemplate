@@ -1,15 +1,15 @@
-mixin menuList(items, deepLimit = 0, deep = 0)
+mixin menuList(items, deepLimit = 0, className = 'menu', deep = 0)
 
-    - var menuClassName = attributes.class ? attributes.class + " " + attributes.class + "_level-" + deep : "menu menu_level-" + deep;
-    - var itemClassName = attributes.class ? attributes.class + "__item " + attributes.class + "__item_level-" + deep : "menu__item menu__item_level-" + deep
-    - var linkClassName = attributes.class ? attributes.class + "__link " + attributes.class + "__link_level-" + deep : "menu__link menu__link_level-" + deep;
+    - var menuClassName = className + " " + className + "_level-" + deep
+    - var itemClassName = className + "__item " + className + "__item_level-" + deep
+    - var linkClassName = className + "__link " + className + "__link_level-" + deep
 
     ul(class = menuClassName)
         each item in items
             li(class = itemClassName)
                 a(href = item.href ? item.href : '#' class = linkClassName)= item.title
                 if deep < deepLimit
-                    +menuList(items, deepLimit, deep + 1)
+                    +menuList(items, className, deepLimit, deep + 1)
 
 
 //- example
@@ -34,7 +34,8 @@ mixin menuList(items, deepLimit = 0, deep = 0)
             {title: 'linkTitle4'},
             {title: 'linkTItle4'}
         ],
-        2
+        2,
+        'className' <-- if you need
     )
 
 
