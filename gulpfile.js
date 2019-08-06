@@ -40,6 +40,9 @@ gulp.task('build-css', done => {
         .pipe(sass({
             includePaths: ['./node_modules/hamburgers/_sass/hamburgers']
         }).on('error', sass.logError))
+        .pipe(autoprefixer({
+            grid: true
+        }))
         .pipe(cleanCSS())
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('./public/css'))
