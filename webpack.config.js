@@ -5,7 +5,9 @@ const TerserPlugin = require('terser-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
+    //export NODE_ENV=development
     mode: process.env.NODE_ENV ? process.env.NODE_ENV : 'development',
+    devtool: 'inline-source-map',
     module: {
         rules: [
             {
@@ -65,7 +67,13 @@ module.exports = {
         splitChunks: {
             chunks: 'all'
         },
-        minimizer: [new TerserPlugin()],
+        minimizer: [new TerserPlugin({
+            terserOptions: {
+                output: {
+                    comments: false,
+                },
+            },
+        })],
     },
     plugins: [
         new VueLoaderPlugin()
