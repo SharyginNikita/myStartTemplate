@@ -1,0 +1,24 @@
+{
+    "rules": {
+        "class-name-format": [1, {
+            "convention": 'strictbem'    
+        }],
+        "variable-name-format": [1, {
+            "convention": 'strictbem'    
+        }],
+
+        "indentation": [4, {
+            "size": 4
+        }],
+        "property-sort-order": [1, {
+            "order": 'concentric',
+            "ignore-custom-properties": 1
+        }],
+        "quotes": [1, {
+            "style": 'single'
+        }],
+        "no-url-domains": 0,
+        "no-url-protocols": 0
+    }
+}
+

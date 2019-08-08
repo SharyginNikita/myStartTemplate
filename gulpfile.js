@@ -1,42 +1,71 @@
-const gulp = require('gulp');
+const { src, dest, watch, series, parallel } = require('gulp');
 const webpack = require('webpack-stream');
+
 const pug = require('gulp-pug');
 const prettify = require('gulp-jsbeautifier');
-const named = require('vinyl-named');
+const htmllint = require('gulp-htmllint');
+const puglint = require('gulp-pug-lint');
+
 const sass = require('gulp-sass');
 const sourcemaps = require('gulp-sourcemaps');
 const cleanCSS = require('gulp-clean-css');
 const autoprefixer = require('gulp-autoprefixer');
-const plumber = require('gulp-plumber');
-const notify = require('gulp-notify');
-const browserSync = require('browser-sync');
+const sassLint = require('gulp-sass-lint')
+
+const named = require('vinyl-named');
+
 const imagemin = require('gulp-imagemin');
 const imageminMozjpeg = require('imagemin-mozjpeg');
+
+const plumber = require('gulp-plumber');
+const notify = require('gulp-notify');
+const fancyLog = require('fancy-log');
+const colors = require('ansi-colors');
+const gulpif = require('gulp-if');
+const browserSync = require('browser-sync');
+
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
-gulp.task('build-html', done => {
-    gulp.src('./src/templates/pages/*.pug')
+let env = process.env.NODE_ENV;
+
+function htmllintReporter(filepath, issues) {
+    if (issues.length > 0) {
+        issues.forEach(issue => {
+            fancyLog(colors.cyan('[gulp-htmllint] ') + colors.white(filepath + ' [' + issue.line + ',' + issue.column + ']: ') + colors.red('(' + issue.code + ') ' + issue.msg));
+        });
+ 
+        process.exitCode = 1;
+    }
+}
+
+function lintCss(cb) {
+    src('./src/scss/**/*.scss')
+        .pipe(sassLint({}))
+        .pipe(sassLint.format())
+        .pipe(sassLint.failOnError())
+    cb();
+}
+
+function buildHtml() {
+    return src('./src/templates/pages/**/*.pug')
         .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
+        .pipe(gulpif(env === 'production', puglint()))
         .pipe(pug())
         .pipe(prettify({}))
-        .pipe(gulp.dest('./public'))
-        .pipe(browserSync.reload({stream: true}))
-    done();
-});
+        .pipe(gulpif(env === 'production', htmllint({}, htmllintReporter)))
+        .pipe(dest('./public'))
+};
 
-
-gulp.task('build-js', done => {
-    gulp.src('./src/js/**/*.{js,json}')
+function buildJs() {
+    return src('./src/js/**/*.{js,json}')
         .pipe(named())
         .pipe(webpack(require('./webpack.config')))
-        .pipe(gulp.dest('./public/js'))
-        .pipe(browserSync.reload({stream: true}))
-    done();
-});
+        .pipe(dest('./public/js'))
+};
 
-gulp.task('build-css', done => {
-    gulp.src('./src/scss/**/*.scss')
-        .pipe(sourcemaps.init())
+function buildCss() {
+    return src('./src/scss/main.scss')
+        .pipe(gulpif(env === 'development', sourcemaps.init()))
         .pipe(sass({
             includePaths: ['./node_modules/hamburgers/_sass/hamburgers']
         }).on('error', sass.logError))
@@ -44,14 +73,14 @@ gulp.task('build-css', done => {
             grid: true
         }))
         .pipe(cleanCSS())
-        .pipe(sourcemaps.write())
-        .pipe(gulp.dest('./public/css'))
-        .pipe(browserSync.reload({stream: true}))
-    done();
-});
+        .pipe(gulpif(env === 'development', sourcemaps.write()))
+        .pipe(dest('./public/css'))
+};
 
-gulp.task('build-images', done => {
-    gulp.src('./src/images/**/*')
+
+
+function buildImages() {
+    return src('./src/images/**/*')
         .pipe(imagemin([
             imagemin.gifsicle({interlaced: true}),
             imagemin.jpegtran({progressive: true}),
@@ -64,46 +93,44 @@ gulp.task('build-images', done => {
                 ]
             })
         ]))
-        .pipe(gulp.dest('./public/images'))
-        .pipe(browserSync.reload({stream: true}))
-    done();
-}); 
+        .pipe(dest('./public/images'))
+}; 
 
 
-gulp.task('build-fonts', done => {
-    gulp.src('./src/fonts/**/*')
-        .pipe(gulp.dest('./public/fonts'))
-        .pipe(browserSync.reload({stream: true}))
-    done();
-});
+function buildFonts() {
+    return src('./src/fonts/**/*')
+        .pipe(dest('./public/fonts'))
+};
 
-
-gulp.task('serve', () => {
-
+function serve(cb) {
     browserSync.init({
-        server: {
-            baseDir: './public'
-        },
-    });
+        server: "./public",
+        port: 8080,
+        host: "0.0.0.0"
+    }, cb);
+}
 
-    gulp.watch('./src/templates/**/*.pug', gulp.parallel('build-html'));    
-    gulp.watch('./src/js/**/*.js', gulp.parallel('build-js'));    
-    gulp.watch('./src/vuex/*', gulp.parallel('build-js'));    
-    gulp.watch('./src/widgets/*', gulp.parallel('build-js'));    
-    gulp.watch('./src/scss/**/*.scss', gulp.parallel('build-css'));    
-    gulp.watch('./src/images/**/*', gulp.parallel('build-images'));
+function reload(cb) {
+    browserSync.reload();
+    cb();
+}
 
-});
+function watcher() {
+    watch('./src/templates/**/*.pug', series(buildHtml, reload));
+    watch('./src/scss/**/*.scss', series(buildCss, reload));
+    watch(['./src/public/js/**/*.js', './src/vuex/*', './src/widgets/*'], series(buildJs, reload));
+    watch('./src/images/**/*', series(buildImages, reload));
+    watch('./src/fonts/**/*', series(buildFonts, reload));
+}
 
-gulp.task('default', 
-    gulp.parallel(
-        'build-fonts',
-        'build-html',
-        'build-js',
-        'build-css',
-        'build-images',
-        'serve'
-    )
-);
+exports.buildHtml = buildHtml;
+exports.buildCss = buildCss;
+exports.buildJs = buildJs;
+exports.lintCss = lintCss;
+exports.serve = serve;
+
+exports.default = parallel(buildHtml, buildCss, buildJs, buildImages, buildFonts, watcher, serve);
+exports.build = parallel(buildHtml, buildCss, buildJs, buildImages, buildFonts);
+
 
 
