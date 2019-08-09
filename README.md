@@ -19,4 +19,6 @@ Start template (Gulp + Webpack) for Pug, SCSS, JS, Vue
 ## Задачи
 * сделать тесты для js
 * проверить и дописать линтеры
+* !пути для таска clear
+* проверить gulp-chanded для js, vue файлов
 
