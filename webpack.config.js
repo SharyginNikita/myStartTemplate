@@ -28,14 +28,21 @@ module.exports = {
             },
             {
                 test: /\.js$/,
-                loader: "babel-loader",
-                options: {
-                    cacheDirectory: true,
-                    plugins: [
-                        "@babel/plugin-transform-runtime",
-                        "@babel/plugin-transform-spread",
-                    ],
-                },
+                use: [
+                    {
+                        loader: "babel-loader",
+                        options: {
+                            cacheDirectory: true,
+                            plugins: [
+                                "@babel/plugin-transform-runtime",
+                                "@babel/plugin-transform-spread",
+                            ],
+                        },
+                    },
+                    {
+                        loader: "eslint-loader"
+                    }
+                ]
             },
             {
                 test: /\.(png|svg|jpg|gif)$/,
@@ -64,9 +71,6 @@ module.exports = {
         extensions: ['*', '.js', '.json', '.vue'],
     },
     optimization: {
-        splitChunks: {
-            chunks: 'all'
-        },
         minimizer: [new TerserPlugin({
             terserOptions: {
                 output: {

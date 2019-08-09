@@ -3,14 +3,13 @@ const webpack = require('webpack-stream');
 
 const pug = require('gulp-pug');
 const prettify = require('gulp-jsbeautifier');
-const htmllint = require('gulp-htmllint');
 const puglint = require('gulp-pug-lint');
 
 const sass = require('gulp-sass');
 const sourcemaps = require('gulp-sourcemaps');
 const cleanCSS = require('gulp-clean-css');
 const autoprefixer = require('gulp-autoprefixer');
-const sassLint = require('gulp-sass-lint')
+const sassLint = require('gulp-sass-lint');
 
 const named = require('vinyl-named');
 
@@ -19,52 +18,26 @@ const imageminMozjpeg = require('imagemin-mozjpeg');
 
 const plumber = require('gulp-plumber');
 const notify = require('gulp-notify');
-const fancyLog = require('fancy-log');
-const colors = require('ansi-colors');
 const gulpif = require('gulp-if');
 const browserSync = require('browser-sync');
 
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
+const config = require('./config.js');
+const dir = config.dir;
 let env = process.env.NODE_ENV;
 
-function htmllintReporter(filepath, issues) {
-    if (issues.length > 0) {
-        issues.forEach(issue => {
-            fancyLog(colors.cyan('[gulp-htmllint] ') + colors.white(filepath + ' [' + issue.line + ',' + issue.column + ']: ') + colors.red('(' + issue.code + ') ' + issue.msg));
-        });
- 
-        process.exitCode = 1;
-    }
-}
 
-function lintCss(cb) {
-    src('./src/scss/**/*.scss')
-        .pipe(sassLint({}))
-        .pipe(sassLint.format())
-        .pipe(sassLint.failOnError())
-    cb();
-}
-
-function buildHtml() {
-    return src('./src/templates/pages/**/*.pug')
+function buildPug() {
+    return src(`${dir.pug}pages/*.pug`)
         .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
-        .pipe(gulpif(env === 'production', puglint()))
         .pipe(pug())
         .pipe(prettify({}))
-        .pipe(gulpif(env === 'production', htmllint({}, htmllintReporter)))
         .pipe(dest('./public'))
 };
 
-function buildJs() {
-    return src('./src/js/**/*.{js,json}')
-        .pipe(named())
-        .pipe(webpack(require('./webpack.config')))
-        .pipe(dest('./public/js'))
-};
-
-function buildCss() {
-    return src('./src/scss/main.scss')
+function buildScss() {
+    return src(`${dir.scss}main.scss`)
         .pipe(gulpif(env === 'development', sourcemaps.init()))
         .pipe(sass({
             includePaths: ['./node_modules/hamburgers/_sass/hamburgers']
@@ -77,10 +50,15 @@ function buildCss() {
         .pipe(dest('./public/css'))
 };
 
-
+function buildJs() {
+    return src(`${dir.js}`)
+        .pipe(named())
+        .pipe(webpack(require('./webpack.config')))
+        .pipe(dest('./public/js'))
+};
 
 function buildImages() {
-    return src('./src/images/**/*')
+    return src(`${dir.images}`)
         .pipe(imagemin([
             imagemin.gifsicle({interlaced: true}),
             imagemin.jpegtran({progressive: true}),
@@ -98,9 +76,21 @@ function buildImages() {
 
 
 function buildFonts() {
-    return src('./src/fonts/**/*')
+    return src(`${dir.fonts}`)
         .pipe(dest('./public/fonts'))
 };
+
+function testPug() {
+    return src([`${dir.pug}**/*.pug`, `!${dir.pug}mixins/**`])
+        .pipe(puglint())
+}
+
+function testScss() {
+    return src(`${dir.scss}**/*.scss`)
+        .pipe(sassLint({}))
+        .pipe(sassLint.format())
+        .pipe(sassLint.failOnError())
+}
 
 function serve(cb) {
     browserSync.init({
@@ -116,21 +106,26 @@ function reload(cb) {
 }
 
 function watcher() {
-    watch('./src/templates/**/*.pug', series(buildHtml, reload));
-    watch('./src/scss/**/*.scss', series(buildCss, reload));
-    watch(['./src/public/js/**/*.js', './src/vuex/*', './src/widgets/*'], series(buildJs, reload));
-    watch('./src/images/**/*', series(buildImages, reload));
-    watch('./src/fonts/**/*', series(buildFonts, reload));
+    watch(`${dir.pug}**/*.pug`, series(buildPug, reload));
+    watch(`${dir.scss}**/*.scss`, series(buildScss, reload));
+    watch([`${dir.js}`, `${dir.vue}`], series(buildJs, reload));
+    watch(`${dir.images}`, series(buildImages, reload));
+    watch(`${dir.fonts}`, series(buildFonts, reload));
 }
 
-exports.buildHtml = buildHtml;
-exports.buildCss = buildCss;
+exports.buildPug = buildPug;
+exports.buildScss = buildScss;
 exports.buildJs = buildJs;
-exports.lintCss = lintCss;
-exports.serve = serve;
 
-exports.default = parallel(buildHtml, buildCss, buildJs, buildImages, buildFonts, watcher, serve);
-exports.build = parallel(buildHtml, buildCss, buildJs, buildImages, buildFonts);
+exports.testPug = testPug;
+exports.testScss = testScss;
+
+exports.serve = serve;
+exports.watcher = watcher;
+
+exports.default = parallel(buildPug, buildScss, buildJs, buildImages, buildFonts, watcher, serve);
+exports.build = parallel(buildPug, buildScss, buildJs, buildImages, buildFonts);
+exports.test = series(testPug, testScss);
 
 
 

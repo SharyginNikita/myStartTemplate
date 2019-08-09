@@ -4,7 +4,7 @@
     "disallowAttributeTemplateString": "all",
     "disallowBlockExpansion": true,
     "disallowClassAttributeWithStaticValue": true,
-    "disallowClassLiteralsBeforeAttributes": true,
+    "disallowClassLiteralsBeforeLiterals": true,
     "disallowDuplicateAttributes": true,
     "disallowHtmlText": true,
     "disallowIdAttributeWithStaticValue": true,
@@ -14,9 +14,13 @@
     "disallowSpacesInsideAttributeBrackets": true,
     "disallowTagInterpolation": true,
     "disallowTemplateString": "all",
+    "disallowTrailingSpaces": true,
     "requireLowerCaseAttributes": true,
     "requireLowerCaseTags": true,
     "requireSpaceAfterCodeOperator": true,
+    "requireSpecificAttributes": [ { "img": [ "src", "alt" ] } ],
     "validateExtensions": true,
-    "validateIndentation": 4 
+    "validateIndentation": 4,
+    "validateDivTags": true,
+    "validateAttributeQuoteMarks": "\""
 }
