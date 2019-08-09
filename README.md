@@ -22,3 +22,5 @@ Start template (Gulp + Webpack) for Pug, SCSS, JS, Vue
 * !пути для таска clear
 * проверить gulp-chanded для js, vue файлов
 
+
+
