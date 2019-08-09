@@ -10,17 +10,19 @@ Start template (Gulp + Webpack) for Pug, SCSS, JS, Vue
 
 ## Установка
 * установите [NodeJS](https://nodejs.org/en/) (если требуется) и [Yarn](https://yarnpkg.com/en/docs/install)
-* скачайте сборку в консоли с помощью [Git](https://gicm.com/downloads): ```https://github.com/SharyginNikita/myStartTemplate.git```
-* установите ```gulp``` глобально: ```yarn global add gulp-cli```
-* перейдите в скачанную папку со сборкой: ```cd myStartTemplate```
-* скачайте необходимые зависимости: ```yarn```
-* чтобы начать работу, введите команду: ```yarn gulp```
+* скачайте сборку в консоли с помощью [Git](https://gicm.com/downloads): ````https://github.com/SharyginNikita/myStartTemplate.git````
+* перейдите в скачанную папку со сборкой: ````cd myStartTemplate````
+* скачайте необходимые зависимости: ````yarn````
+* чтобы начать работу, введите команду: ````yarn gulp````
 
 ## Задачи
 * сделать тесты для js
 * проверить и дописать линтеры
 * !пути для таска clear
 * проверить gulp-chanded для js, vue файлов
+
+
+
 
 
 
