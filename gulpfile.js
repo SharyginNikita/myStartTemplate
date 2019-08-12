@@ -85,7 +85,7 @@ function buildImages() {
         ]))
         .pipe(dest('./public/images'))
 }; 
-
+exports.buildImages = buildImages;
 
 function buildFonts() {
     return src(`${dir.fonts}`)
@@ -93,6 +93,7 @@ function buildFonts() {
         .pipe(changed(`${dir.fonts}`))
         .pipe(dest('./public/fonts'))
 };
+exports.buildFonts = buildFonts;
 
 function testPug() {
     return src([`${dir.pug}**/*.pug`, `!${dir.pug}mixins/**`])
