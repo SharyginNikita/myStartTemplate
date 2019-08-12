@@ -42,7 +42,7 @@ exports.buildPug = buildPug;
 
 function buildScss() {
     return src(`${dir.scss}*.scss`)
-    //.pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
+        .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
         .pipe(changed(`${dir.scss}*.scss`))
         .pipe(gulpif(env === 'development', sourcemaps.init()))
         .pipe(sass({
