@@ -20,6 +20,8 @@ Start template (Gulp + Webpack) for Pug, SCSS, JS, Vue
 * проверить и дописать линтеры
 * !пути для таска clear
 * проверить gulp-chanded для js, vue файлов
+* devDependencies
+* polyfills (babel > 7.4.0)
 
 
 
