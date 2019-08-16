@@ -9,7 +9,7 @@ mixin menuList(items, deepLimit = 0, className = 'menu', deep = 0)
             li(class = itemClassName)
                 a(href = item.href ? item.href : '#' class = linkClassName)= item.title
                 if deep < deepLimit
-                    +menuList(items, className, deepLimit, deep + 1)
+                    +menuList(items, deepLimit, className, deep + 1)
 
 
 //- example
