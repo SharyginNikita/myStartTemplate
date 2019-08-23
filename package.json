@@ -1,6 +1,6 @@
 {
     "name": "myStartTemplate",
-    "version": "1.1.5",
+    "version": "1.2.0",
     "main": "index.js",
     "repository": "http://gitea.websm.io/SharyginNikita/myStartTemplate.git",
     "author": "sharygin.n@yandex.ru",
@@ -15,7 +15,7 @@
         "@babel/core": "^7.4.5",
         "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
         "@babel/plugin-transform-runtime": "^7.5.5",
-        "@babel/polyfill": "^7.0.0",
+        "@babel/polyfill": "^7.4.4",
         "@babel/preset-env": "^7.4.5",
         "@babel/register": "^7.4.4",
         "autoprefixer": "^9.1.3",
