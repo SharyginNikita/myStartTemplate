@@ -1,9 +1,9 @@
 'use strict';
 
-
+import Module from '../widgets/module/index.js';
 /*
  
-import yuor vue modules example
+import your vue modules example
 
 import Module from '../widgets/module';
 const module = new Module('#module-widget');
