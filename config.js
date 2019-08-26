@@ -1,5 +1,6 @@
 let config = {
     'dir': {
+        'public': './public/',
         'scss': './src/scss/',
         'pug': './src/templates/',
         'images': './src/images/**/*',

@@ -15,6 +15,7 @@ const named = require('vinyl-named');
 
 const imagemin = require('gulp-imagemin');
 const imageminMozjpeg = require('imagemin-mozjpeg');
+const svgstore = require('gulp-svgstore');
 
 const changed = require('gulp-changed');
 const plumber = require('gulp-plumber');
@@ -36,7 +37,7 @@ function buildPug() {
         .pipe(changed(`${dir.pug}pages/*.pug`))
         .pipe(pug())
         .pipe(prettify({}))
-        .pipe(dest('./public'))
+        .pipe(dest(`${dir.public}`))
 };
 exports.buildPug = buildPug;
 
@@ -53,7 +54,7 @@ function buildScss() {
         }))
         .pipe(cleanCSS())
         .pipe(gulpif(env === 'development', sourcemaps.write()))
-        .pipe(dest('./public/css'))
+        .pipe(dest(`${dir.public}css`))
 };
 exports.buildScss = buildScss;
 
@@ -63,12 +64,12 @@ function buildJs() {
         .pipe(changed(`${dir.js}`))
         .pipe(named())
         .pipe(webpack(require('./webpack.config')))
-        .pipe(dest('./public/js'))
+        .pipe(dest(`${dir.public}js`))
 };
 exports.buildJs = buildJs;
 
 function buildImages() {
-    return src(`${dir.images}`)
+    return src(`${dir.images}.*`)
         .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
         .pipe(changed(`${dir.images}`))
         .pipe(imagemin([
@@ -83,15 +84,25 @@ function buildImages() {
                 ]
             })
         ]))
-        .pipe(dest('./public/images'))
+        .pipe(dest(`${dir.public}images`))
 }; 
 exports.buildImages = buildImages;
+
+function svgStore() {
+    return src(`${dir.images}icons/*.svg`)
+        .pipe(imagemin([
+            imagemin.svgo({})
+        ]))
+        .pipe(svgstore())
+        .pipe(dest(`${dir.images}`));
+}
+exports.svgStore = svgStore;
 
 function buildFonts() {
     return src(`${dir.fonts}`)
         .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
         .pipe(changed(`${dir.fonts}`))
-        .pipe(dest('./public/fonts'))
+        .pipe(dest(`${dir.public}fonts`))
 };
 exports.buildFonts = buildFonts;
 
@@ -102,7 +113,7 @@ function testPug() {
 exports.testPug = testPug;
 
 function testScss() {
-    return src(`${dir.scss}**/*.scss`)
+    return src(`${dir.public}`)
         .pipe(sassLint({}))
         .pipe(sassLint.format())
         .pipe(sassLint.failOnError())
@@ -111,7 +122,7 @@ exports.testScss = testScss;
 
 function serve(cb) {
     browserSync.init({
-        server: "./public",
+        server: dir.public,
         port: 8080,
         host: "0.0.0.0"
     }, cb);
@@ -124,10 +135,12 @@ function reload(cb) {
 }
 
 function clear() {
-  return del([
-        './public/**/*',
-      '!./public/data',
-  ]);
+    return del([
+        `${dir.public}*.html`,
+        `${dir.public}css`,
+        `${dir.public}js`,
+        `${dir.public}images`,
+    ]);
 }
 exports.clear = clear;
 
@@ -135,15 +148,16 @@ function watcher() {
     watch(`${dir.pug}**/*.pug`, series(buildPug, reload));
     watch(`${dir.scss}**/*.scss`, series(buildScss, reload));
     watch([`${dir.js}`, `${dir.vue}`], series(buildJs, reload));
-    watch(`${dir.images}`, series(buildImages, reload));
+    watch(`${dir.images}**/*`, series(buildImages, svgStore, reload));
     watch(`${dir.fonts}`, series(buildFonts, reload));
 }
 exports.watcher = watcher;
 
 
-exports.default = parallel(buildPug, buildScss, buildJs, buildImages, buildFonts, watcher, serve);
-exports.build = parallel(buildPug, buildScss, buildJs, buildImages, buildFonts);
+exports.default = series(svgStore, buildImages, buildPug, buildScss, buildJs, buildFonts, serve, watcher,);
+exports.build = parallel(svgStore, buildImages,  buildPug, buildScss, buildJs, buildFonts);
 exports.test = series(testPug, testScss);
+
 
 
 
