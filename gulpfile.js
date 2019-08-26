@@ -90,9 +90,6 @@ exports.buildImages = buildImages;
 
 function svgStore() {
     return src(`${dir.images}icons/*.svg`)
-        .pipe(imagemin([
-            imagemin.svgo({})
-        ]))
         .pipe(svgstore())
         .pipe(dest(`${dir.images}icons`));
 }
