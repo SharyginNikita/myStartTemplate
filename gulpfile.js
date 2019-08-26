@@ -94,7 +94,7 @@ function svgStore() {
             imagemin.svgo({})
         ]))
         .pipe(svgstore())
-        .pipe(dest(`${dir.images}`));
+        .pipe(dest(`${dir.images}icons`));
 }
 exports.svgStore = svgStore;
 
