@@ -110,7 +110,7 @@ function testPug() {
 exports.testPug = testPug;
 
 function testScss() {
-    return src(`${dir.public}`)
+    return src(`${dir.scss}**/*`)
         .pipe(sassLint({}))
         .pipe(sassLint.format())
         .pipe(sassLint.failOnError())
