@@ -69,7 +69,7 @@ function buildJs() {
 exports.buildJs = buildJs;
 
 function buildImages() {
-    return src([`${dir.images}**/*` ,`!${dir.images}icons/*`])
+    return src([`${dir.images}**/*` ,`!${dir.images}svgStore/*`])
         .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
         .pipe(changed(`${dir.images}`))
         .pipe(imagemin([
@@ -89,9 +89,9 @@ function buildImages() {
 exports.buildImages = buildImages;
 
 function svgStore() {
-    return src(`${dir.images}icons/*.svg`)
+    return src(`${dir.images}svgStore/*.svg`)
         .pipe(svgstore())
-        .pipe(dest(`${dir.images}icons`));
+        .pipe(dest(`${dir.images}svgStore`));
 }
 exports.svgStore = svgStore;
 
