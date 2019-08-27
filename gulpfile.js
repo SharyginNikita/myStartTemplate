@@ -34,7 +34,7 @@ let env = process.env.NODE_ENV;
 function buildPug() {
     return src(`${dir.pug}pages/*.pug`)
         .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
-        .pipe(changed(`${dir.pug}pages/*.pug`))
+        .pipe(changed(`${dir.public}`, {extension: '.html'}))
         .pipe(pug())
         .pipe(prettify({}))
         .pipe(dest(`${dir.public}`))
@@ -44,7 +44,7 @@ exports.buildPug = buildPug;
 function buildScss() {
     return src(`${dir.scss}*.scss`)
         .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
-        .pipe(changed(`${dir.scss}**/*`))
+        .pipe(changed(`${dir.public}css`, {extension: '.css'}))
         .pipe(gulpif(env === 'development', sourcemaps.init()))
         .pipe(sass({
             includePaths: ['./node_modules/hamburgers/_sass/hamburgers']
@@ -61,7 +61,7 @@ exports.buildScss = buildScss;
 function buildJs() {
     return src(`${dir.js}`)
         .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
-        .pipe(changed(`${dir.js}`))
+        .pipe(changed(`${dir.public}js`))
         .pipe(named())
         .pipe(webpack(require('./webpack.config')))
         .pipe(dest(`${dir.public}js`))
@@ -71,7 +71,7 @@ exports.buildJs = buildJs;
 function buildImages() {
     return src([`${dir.images}**/*` ,`!${dir.images}svgStore/*`])
         .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
-        .pipe(changed(`${dir.images}**/*`))
+        .pipe(changed(`${dir.public}images`))
         .pipe(imagemin([
             imagemin.gifsicle({interlaced: true}),
             imagemin.jpegtran({progressive: true}),
@@ -98,7 +98,7 @@ exports.svgStore = svgStore;
 function buildFonts() {
     return src(`${dir.fonts}`)
         .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
-        .pipe(changed(`${dir.fonts}`))
+        .pipe(changed(`${dir.public}fonts`))
         .pipe(dest(`${dir.public}fonts`))
 };
 exports.buildFonts = buildFonts;
