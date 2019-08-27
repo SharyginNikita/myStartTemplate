@@ -3,7 +3,7 @@ let config = {
         'public': './public/',
         'scss': './src/scss/',
         'pug': './src/templates/',
-        'images': './src/images/**/*',
+        'images': './src/images/',
         'js': './src/js/**/*.js',
         'fonts': './src/fonts/**/*',
         'vue': './src/{vuex, modules}/**/*.{js,vue}'

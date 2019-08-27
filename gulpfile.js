@@ -44,7 +44,7 @@ exports.buildPug = buildPug;
 function buildScss() {
     return src(`${dir.scss}*.scss`)
         .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
-        .pipe(changed(`${dir.scss}*.scss`))
+        .pipe(changed(`${dir.scss}**/*`))
         .pipe(gulpif(env === 'development', sourcemaps.init()))
         .pipe(sass({
             includePaths: ['./node_modules/hamburgers/_sass/hamburgers']
@@ -71,7 +71,7 @@ exports.buildJs = buildJs;
 function buildImages() {
     return src([`${dir.images}**/*` ,`!${dir.images}svgStore/*`])
         .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
-        .pipe(changed(`${dir.images}`))
+        .pipe(changed(`${dir.images}**/*`))
         .pipe(imagemin([
             imagemin.gifsicle({interlaced: true}),
             imagemin.jpegtran({progressive: true}),
