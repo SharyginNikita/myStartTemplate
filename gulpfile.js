@@ -69,7 +69,7 @@ function buildJs() {
 exports.buildJs = buildJs;
 
 function buildImages() {
-    return src([`${dir.images}.*`, `!${dir.images}icons/*.*`])
+    return src([`${dir.images}**/*` ,`!${dir.images}icons/*`])
         .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
         .pipe(changed(`${dir.images}`))
         .pipe(imagemin([
