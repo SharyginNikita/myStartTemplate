@@ -1,13 +1,13 @@
 mixin menuList(items, deepLimit = 0, className = 'menu', deep = 0)
 
-    - var menuClassName = className + " " + className + "_level-" + deep
-    - var itemClassName = className + "__item " + className + "__item_level-" + deep
-    - var linkClassName = className + "__link " + className + "__link_level-" + deep
+    - let menuClassName = className + " " + className + "_level-" + deep
+    - let itemClassName = className + "__item " + className + "__item_level-" + deep
+    - let linkClassName = className + "__link " + className + "__link_level-" + deep
 
     ul(class = menuClassName)
         each item in items
             li(class = itemClassName)
-                a(href = item.href ? item.href : '#' class = linkClassName)= item.title
+                a(href = item.href ? item.href : '#' class = item.extraClass ? linkClassName + " " + item.extraClass : linkClassName)= item.title
                 if deep < deepLimit
                     +menuList(items, deepLimit, className, deep + 1)
 
@@ -28,7 +28,7 @@ mixin menuList(items, deepLimit = 0, className = 'menu', deep = 0)
 
     +navList(
         [
-            {title: 'linkTitle1', href: '/linkHref0' <-- if you need, you can set desired link (default value = '#')},
+            {title: 'linkTitle1', href: '/linkHref0', extraClass: 'active'} <-- if you need, you can set desired link (default value = '#') and/or extraClass,
             {title: 'linkTitle2', href: '/linkHref1'},
             {title: 'linkTitle3'},
             {title: 'linkTitle4'},

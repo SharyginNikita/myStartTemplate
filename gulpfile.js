@@ -30,6 +30,8 @@ const config = require('./config.js');
 const dir = config.dir;
 let env = process.env.NODE_ENV;
 
+console.log(env);
+
 
 function buildPug() {
     return src(`${dir.pug}pages/*.pug`)
@@ -57,15 +59,25 @@ function buildScss() {
 };
 exports.buildScss = buildScss;
 
-function buildJs() {
+function buildJsDev() {
     return src(`${dir.js}`)
         .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
-        .pipe(changed(`${dir.public}js`))
+        //.pipe(changed(`${dir.public}js`))
         .pipe(named())
-        .pipe(webpack(require('./webpack.config')))
+        .pipe(webpack(require('./webpack.dev.js')))
         .pipe(dest(`${dir.public}js`))
 };
-exports.buildJs = buildJs;
+exports.buildJsDev = buildJsDev;
+
+function buildJsProd() {
+    console.log(1);
+    return src(`${dir.js}`)
+        .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
+        .pipe(named())
+        .pipe(webpack(require('./webpack.prod.js')))
+        .pipe(dest(`${dir.public}js`))
+};
+exports.buildJsProd = buildJsProd;
 
 function buildImages() {
     return src([`${dir.images}**/*` ,`!${dir.images}svgStore/*`])
@@ -143,15 +155,16 @@ exports.clear = clear;
 function watcher() {
     watch(`${dir.pug}**/*.pug`, series(buildPug, reload));
     watch(`${dir.scss}**/*.scss`, series(buildScss, reload));
-    watch([`${dir.js}`, `${dir.vue}`], series(buildJs, reload));
+    watch([`${dir.js}`, `${dir.vue}`], series(buildJsDev, reload));
     watch(`${dir.images}**/*`, series(buildImages, svgStore, reload));
     watch(`${dir.fonts}`, series(buildFonts, reload));
 }
 exports.watcher = watcher;
 
 
-exports.default = series(svgStore, buildImages, buildPug, buildScss, buildJs, buildFonts, serve, watcher,);
-exports.build = parallel(svgStore, buildImages,  buildPug, buildScss, buildJs, buildFonts);
+exports.default = series(svgStore, buildImages, buildPug, buildScss, buildJsDev, buildFonts, serve, watcher);
+exports.gulpProd = series(svgStore, buildImages, buildPug, buildScss, buildJsProd, buildFonts, serve, watcher);
+exports.build = parallel(svgStore, buildImages,  buildPug, buildScss, buildJsDev, buildFonts);
 exports.test = series(testPug, testScss);
 
 

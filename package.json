@@ -6,8 +6,8 @@
     "author": "sharygin.n@yandex.ru",
     "license": "MIT",
     "scripts": {
-        "gulp": "NODE_ENV='development' gulp",
-        "gulp-prod": "NODE_ENV='production' gulp",
+        "gulp": "SET NODE_ENV='development' && gulp",
+        "gulp-prod": "SET NODE_ENV='production' && gulp",
         "test": "gulp test",
         "test-js": "eslint '.src/js'"
     },
@@ -55,6 +55,7 @@
         "vue-loader": "^15.7.1",
         "vue-template-compiler": "^2.6.10",
         "webpack": "^4.39.2",
+        "webpack-merge": "^4.2.2",
         "webpack-stream": "^5.2.1",
         "whatwg-fetch": "^3.0.0"
     },
