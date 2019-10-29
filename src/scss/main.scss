@@ -1,18 +1,9 @@
-@import
-    'utils/fonts',
-    'utils/vars';
+@forward 'utils';
 
-@import
-    'base/base';
+@forward 'base';
 
-@import
-    'layout/layout',
-    'layout/header',
-    'layout/footer';
+@forward 'layout';
 
-@import
-    'components/buttons',
-    'components/titles';
+@forward 'components';
 
-@import
-    'pages/index';
+@forward 'pages';
