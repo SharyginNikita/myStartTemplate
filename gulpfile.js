@@ -1,5 +1,6 @@
 const { src, dest, watch, series, parallel } = require('gulp');
 const webpack = require('webpack-stream');
+const Fiber = require('fibers');
 
 const pug = require('gulp-pug');
 const prettify = require('gulp-jsbeautifier');
@@ -30,7 +31,7 @@ const config = require('./config.js');
 const dir = config.dir;
 let env = process.env.NODE_ENV;
 
-console.log(env);
+sass.compiler = require('sass');
 
 
 function buildPug() {
@@ -47,9 +48,7 @@ function buildScss() {
     return src(`${dir.scss}*.scss`)
         .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
         .pipe(gulpif(env === 'development', sourcemaps.init()))
-        .pipe(sass({
-            includePaths: ['./node_modules/hamburgers/_sass/hamburgers']
-        }).on('error', sass.logError))
+        .pipe(sass({fiber: Fiber}).on('error', sass.logError))
         .pipe(autoprefixer({
             grid: true
         }))

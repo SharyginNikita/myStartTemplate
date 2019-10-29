@@ -1,3 +1,5 @@
+@use '../utils/vars' as global;
+
 .title {
 
     margin: 0;
@@ -5,7 +7,7 @@
     text-align: center;
     text-transform: uppercase;
 
-    font: 600 18px $font-default;
+   font: 600 18px global.$font-default;
 
     &_h1 {
 

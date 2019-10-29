@@ -1,5 +1,6 @@
-.main {
+@use '../utils/vars' as global;
 
+.main {
     display: flex;
 
     flex-direction: column;
@@ -9,12 +10,10 @@
     width: 100%;
 
     &__wrapper {
-
         display: flex;
         flex-direction: column;
         width: 100%;
-        max-width: $width-container;
-
+        max-width: global.$width-container;
     }
 }
 
