@@ -1,7 +1,7 @@
 'use strict';
 
-import Module from '../widgets/module/index.js';
 /*
+import Module from '../widgets/module/index.js';
  
 import your vue modules example
 
