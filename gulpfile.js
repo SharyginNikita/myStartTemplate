@@ -27,7 +27,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 const config = require('./config.js');
 const dir = config.dir;
-let env = process.env.NODE_ENV;
+let env = process.env.NODE_ENV.trim();
 
 sass.compiler = require('sass');
 
