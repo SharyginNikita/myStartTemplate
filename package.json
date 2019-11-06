@@ -7,7 +7,7 @@
     "license": "MIT",
     "scripts": {
         "gulp": "SET NODE_ENV='development' && gulp",
-        "gulp-prod": "SET NODE_ENV='production' && gulp",
+        "gulp-prod": "SET NODE_ENV='production' && gulp gulpProd",
         "test": "gulp test",
         "test-js": "eslint '.src/js'"
     },
