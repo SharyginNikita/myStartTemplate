@@ -1,5 +1,8 @@
 include ../mixins/mixins.pug
 
+block variables
+    - let date = new Date();
+
 doctype html
 html.html(lang="ru")
 
@@ -12,22 +15,14 @@ html.html(lang="ru")
         meta(name="msapplication-TileColor" content="#ffffff")
         //meta(name="msapplication-TileImage" content="/images/faviocns/ms-icon-144x144.png")
         meta(name="theme-color" content="#ffffff")
-        link(rel="stylesheet" href="/css/main.css")
+        link(rel="stylesheet" href="/css/main.css?" + date)
 
     body.body
 
-        include header.pug
-
-        main.main
-
-            .main__wrapper
-
-                block content
-
-        include footer.pug
+        block layoutPage
 
         noscript У вас отключен JavaScript, пожалуйста, включите его для корректной работы сайта.
 
         block scripts
-            script(src="/js/polyfills.js")
-            script(src="/js/main.js")
+            script(src="/js/polyfills.js?" + date)
+            script(src="/js/main.js" + date)
