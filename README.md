@@ -22,9 +22,8 @@ Start template (Gulp + Webpack) for Pug, SCSS, JS, Vue
 * Отдельные таски можно посмотреть в gulpfile.js
 
 ## Задачи
-* сделать тесты для js
-* проверить и дописать линтеры
-* проверить gulp-chanded для js, vue файлов
+* JS Unit tests
+* Check linters
 * vue-lint
 
 
