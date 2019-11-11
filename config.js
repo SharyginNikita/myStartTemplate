@@ -1,4 +1,8 @@
 let config = {
+    'mode': {
+        'dev': 'development',
+        'prod': 'production'
+    },
     'dir': {
         'public': './public/',
         'scss': './src/scss/',

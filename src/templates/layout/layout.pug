@@ -24,5 +24,7 @@ html.html(lang="ru")
         noscript У вас отключен JavaScript, пожалуйста, включите его для корректной работы сайта.
 
         block scripts
+            script(src="/js/vendors~polyfills.js?" + date)
+            script(src="/js/vendors~main.js?" + date)
             script(src="/js/polyfills.js?" + date)
             script(src="/js/main.js?" + date)
