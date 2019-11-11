@@ -1,7 +1,5 @@
 'use strict';
 
-import swiper from 'swiper';
-
 console.log('work');
 /*
 import Module from '../widgets/module/index.js';
