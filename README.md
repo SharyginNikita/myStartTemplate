@@ -8,7 +8,7 @@ Start template (Gulp + Webpack) for Pug, SCSS, JS, Vue
 * используется / used [Webpack](https://webpack.js.org/) для сборки JavaScript и Vue компонентов / for JavaScript and Vue components
 * Используется / used [gulp-pug-linter](https://www.npmjs.com/package/gulp-pug-linter), [EsLint](https://eslint.org/)
 
-## Установка
+## Установка / Install
 * установите / install [NodeJS](https://nodejs.org/en/) и / and [Yarn](https://yarnpkg.com/en/docs/install) (если требуется) / (if you need)
 * установите / install [Git](https://gicm.com/downloads) и перейдите на репозиторий шаблона / and open template repository ````https://github.com/SharyginNikita/myStartTemplate.git````
 * нажмите на кнопку / press on button ````use this template```` (Также вы можете форкнуть репозиторий / aslo you can fork repository)
@@ -26,7 +26,7 @@ Start template (Gulp + Webpack) for Pug, SCSS, JS, Vue
 * ````yarn gulp```` clear удалить все / delete all html, css, js, img файлы из соответсвующих папок / files from them folder (смотреть / check gulpfile.js и / and config.js)
 * Отдельные таски можно посмотреть в / another task you can see in gulpfile.js
 
-## Дополнительно
+## Дополнительная информация / Info
 * Pug миксин много-уровнего меню / Pug mixin multi level menu  src/templates/mixins/menuList-mixin.pug (Документация внутри / documentation in file)
 * Используется / used dart sass
 * SCSS Lint Task был удален так как gulp-sass-lint на данный момент не поддерживает dart-sass / was deleted because gulp-sass-lint doesn't support dart-sass
