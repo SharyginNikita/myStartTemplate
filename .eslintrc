@@ -1,7 +1,14 @@
 {
     "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+          "modules": true
+        }
+    },
+
     "rules": {
         "max-len": [1, 70, 2, {ignoreComments: true}] 
     }
 }
-

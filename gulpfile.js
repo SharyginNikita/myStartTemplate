@@ -31,7 +31,7 @@ const modeProdIndex = process.argv.indexOf("--prod");
 
 let mode = config.mode.dev;
 
-console.log(process.argv);
+//console.log(process.argv);
 
 if (modeProdIndex > -1) {
     mode = 'production';
