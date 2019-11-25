@@ -24,7 +24,7 @@ Start template (Gulp + Webpack) for Pug, SCSS, JS, Vue
 * ````yarn gulp build-prod```` (Сборка в режиме production / Build in production mode)
 * ````yarn gulp testPug```` линтинг Pug файлов / lint Pug files
 * ````yarn gulp clear```` удалить все / delete all html, css, js, img файлы из соответсвующих папок / files from them folder (смотреть / check gulpfile.js и / and config.js)
-* Отдельные таски можно посмотреть в / another task you can see in gulpfile.js
+* Отдельные таски можно посмотреть в / other task you can see in gulpfile.js
 
 ## Дополнительная информация / Info
 * Pug миксин много-уровнего меню / Pug mixin multi level menu  src/templates/mixins/menuList-mixin.pug (Документация внутри / documentation in file)
