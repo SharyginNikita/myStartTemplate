@@ -148,7 +148,7 @@ exports.testPug = testPug;
 
 
 //exports.test = series(testPug, testScss);
-//gulp-sass lint doesn't support dart-sass 
+//gulp-sass lint doesn't support dart-sass
 
 function serve(cb) {
     browserSync.init(
@@ -180,33 +180,31 @@ exports.clear = clear;
 function watcher() {
     watch(
         `${dir.pug}**/*.pug`,
-        {ignoreInitial: false},
         series(buildPug, reload)
     );
     watch(
         `${dir.scss}**/*.scss`,
-        { ignoreInitial: false },
         series(buildScss, reload)
     );
     if (mode === 'development') {
         watch(
             [`${dir.js}`, `${dir.vue}`],
-            { ignoreInitial: false },
             series(buildJsDev, reload)
         );
     } else {
         watch(
             [`${dir.js}`, `${dir.vue}`],
-            { ignoreInitial: false },
             series(buildJsProd, reload)
         );
     }
     watch(
         `${dir.images}**/*`,
-        { ignoreInitial: false },
         series(buildImages, reload)
     );
-    watch(`${dir.fonts}`, { ignoreInitial: false }, series(buildFonts, reload));
+    watch(
+        `${dir.fonts}`,
+        series(buildFonts, reload)
+    );
 }
 exports.watcher = watcher;
 
@@ -226,4 +224,6 @@ exports.buildProd = series(
     buildFonts,
 );
 
-exports.default = series(serve, watcher);
+let defaultTask = mode === 'development' ? this.buildDev : this.buildProd;
+
+exports.default = series(defaultTask, serve, watcher);
