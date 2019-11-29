@@ -1,6 +1,6 @@
 {
     "name": "myStartTemplate",
-    "version": "1.5.2",
+    "version": "1.6",
     "main": "index.js",
     "repository": "http://gitea.websm.io/SharyginNikita/myStartTemplate.git",
     "author": "sharygin.n@yandex.ru",
@@ -57,9 +57,5 @@
         "webpack-merge": "^4.2.2",
         "webpack-stream": "^5.2.1",
         "whatwg-fetch": "^3.0.0"
-    },
-    "browserslist": [
-        "defaults",
-        "last 2 version"
-    ]
+    }
 }

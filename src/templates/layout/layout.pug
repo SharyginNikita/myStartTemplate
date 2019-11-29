@@ -1,7 +1,13 @@
 include ../mixins/mixins.pug
 
 block variables
-    - let date = new Date();
+    - let utcDate = new Date();
+    - let day = utcDate.getDate();
+    - let month = utcDate.getMonth();
+    - let year = utcDate.getFullYear();
+    - let hours = utcDate.getHours();
+    - let minutes = utcDate.getMinutes();
+    - let date = `${day}.${month}.${year}.${hours}.${minutes}`;
 
 doctype html
 html.html(lang="ru")
@@ -24,6 +30,6 @@ html.html(lang="ru")
         noscript У вас отключен JavaScript, пожалуйста, включите его для корректной работы сайта.
 
         block scripts
-            script(src="/js/vendors~polyfills.js?" + date)
+            script(src="/js/common.js?" + date)
             script(src="/js/polyfills.js?" + date)
             script(src="/js/main.js?" + date)
