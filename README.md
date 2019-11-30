@@ -14,6 +14,7 @@ Start template (Gulp + Webpack) for Pug, SCSS, JS, Vue
 * нажмите на кнопку / press on button ````use this template```` (Также вы можете форкнуть репозиторий / aslo you can fork repository)
 * склонируйте репозиторий используя SSH ключ (рекомендуется) / clone repository used SHH key (recommended)````git@github.com:SharyginNikita/myStartTemplate.git````
 * перейдите в скачанную папку со сборкой: / change directory on template ````cd myStartTemplate````
+* инициализируйте репозиторий / init repository ````yarn init````
 * скачайте необходимые зависимости: / download required dependencies ````yarn````
 * чтобы начать работу, введите команду: / start work use command ````yarn gulp````
 
