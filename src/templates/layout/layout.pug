@@ -7,20 +7,40 @@ block variables
     - let year = utcDate.getFullYear();
     - let hours = utcDate.getHours();
     - let minutes = utcDate.getMinutes();
-    - let date = `${day}.${month}.${year}.${hours}.${minutes}`;
+    - let date = `${day}${month}${year}${hours}${minutes}`;
 
 doctype html
 html.html(lang="ru")
 
     head
 
-        title myStartTemplate
-        meta(charset="utf-8")
+        meta(charset='utf-8')
+        title {{page_title}}
         meta(name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, maximum-scale=1.0")
-        meta(http-equiv="X-UA-Compatible" content="IE=edge")
-        meta(name="msapplication-TileColor" content="#ffffff")
-        //meta(name="msapplication-TileImage" content="/images/faviocns/ms-icon-144x144.png")
         meta(name="theme-color" content="#ffffff")
+        meta(name="msapplication-TileColor" content="#ffffff")
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='HandheldFriendly', content='True')
+        meta(name='google', content='notranslate')
+        meta(name='format-detection', content='telephone=no')
+        meta(name='format-detection', content='address=no')
+        meta(name='apple-mobile-web-app-capable', content='yes')
+        meta(name='apple-mobile-web-app-status-bar-style', content='black')
+        meta(name='description', content='{{page_meta_description}}')
+        meta(property='og:locale', content='ru_RU')
+        meta(property='og:type', content='website')
+        meta(property='og:title', content='{{page_title}}')
+        meta(property='og:url', content='{{page_url}}')
+        meta(property='og:description', content='{{page_meta_description}}')
+        meta(property='og:site_name', content='{{site_name}}')
+        meta(property='og:image', content='{{page_og_image}}')
+        meta(property='og:image:alt', content='{{page_og_image_alt}}')
+        meta(name='twitter:card', content='summary')
+        meta(name='twitter:site', content='{{twitter_site}}')
+        meta(name='twitter:title', content='{{page_title}}')
+        meta(name='twitter:description', content='{{page_meta_description}}')
+        meta(name='twitter:image', content='{{page_og_image}}')
+        meta(name="msapplication-TileImage" type="image/x-icon" rel="shortcut icon" content="/favicon.ico?" + date)
         link(rel="stylesheet" href="/css/main.css?" + date)
 
     body.body
