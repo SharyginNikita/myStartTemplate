@@ -122,6 +122,11 @@ function buildImages() {
 }
 exports.buildImages = buildImages;
 
+function buildFavicon() {
+    return src(`${dir.images}favicon.ico`)
+        .pipe(dest(`${dir.public}`));
+}
+
 function buildFonts() {
     return src(`${dir.fonts}`)
         .pipe(
@@ -172,7 +177,8 @@ function clear() {
         `${dir.public}*.html`,
         `${dir.public}css`,
         `${dir.public}js`,
-        `${dir.public}images`
+        `${dir.public}images`,
+        `${dir.public}favicon.ico`
     ]);
 }
 exports.clear = clear;
@@ -199,7 +205,7 @@ function watcher() {
     }
     watch(
         `${dir.images}**/*`,
-        series(buildImages, reload)
+        series(buildImages, buildFavicon, reload)
     );
     watch(
         `${dir.fonts}`,
@@ -210,6 +216,7 @@ exports.watcher = watcher;
 
 exports.buildDev = series(
     buildImages,
+    buildFavicon,
     buildPug,
     buildScss,
     buildJsDev,
@@ -218,6 +225,7 @@ exports.buildDev = series(
 
 exports.buildProd = series(
     buildImages,
+    buildFavicon,
     buildPug,
     buildScss,
     buildJsProd,
