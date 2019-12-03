@@ -1,10 +1,10 @@
 {
     "rules": {
         "class-name-format": [1, {
-            "convention": 'strictbem'    
+            "convention": 'strictbem'
         }],
         "variable-name-format": [1, {
-            "convention": 'strictbem'    
+            "convention": 'strictbem'
         }],
 
         "indentation": [4, {
